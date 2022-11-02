@@ -22,8 +22,8 @@ class BoxParam
     bool text = false;
 
     BoxParam() {}
-    uint width_in() { return GFX_LCD_WIDTH - 2*(thickness + x + margin); }
-    uint height_in() { return height - 2*thickness; }
+    uint getWidthIn() { return GFX_LCD_WIDTH - 2*(thickness + x + margin); }
+    uint getHeightIn() { return height - 2*thickness; }
 
     void setHeightIn(uint8_t _height_in)
     {
@@ -109,10 +109,10 @@ void drawBoxText(const char *text, BoxParam box, TextParam txt, uint &export_var
   if (!txt.textFitHeight(box)) { box.height = box.thickness + FONT_HEIGHT; }
 
   int xpos = box.x + box.margin + box.thickness;
-      xpos = txt.center_h ? xpos + (box.width_in() - txtLen)/2 : xpos +txt.margin_left;
+      xpos = txt.center_h ? xpos + (box.getWidthIn() - txtLen)/2 : xpos +txt.margin_left;
 
   int ypos = (box.y + box.margin + box.thickness) - (txt.margin_top);
-      ypos = txt.center_v ? ypos + (box.height_in()/2) : ypos + box.height_in() - FONT_WIDTH;
+      ypos = txt.center_v ? ypos + (box.getHeightIn()/2) : ypos + box.getHeightIn() - FONT_WIDTH;
 
   gfx_PrintStringXY(text, xpos, ypos);
 
