@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export PATH="/home/matthieu/CEdev/bin:$PATH"
+export CEDEV=~/CEdev/
+
+cd "/home/matthieu/Projets/TI83PCE/Scitools/"

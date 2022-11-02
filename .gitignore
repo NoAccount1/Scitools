@@ -1,0 +1,9 @@
+**/.vscode
+**/bin
+**/obj
+# test
+**-cppcheck-build-dir
+/src/include.h
+
+**/**.cppcheck
+**/**.cpp.snalyzerinfo
