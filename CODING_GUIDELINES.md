@@ -6,7 +6,6 @@
 | Variable | snake_case |
 | Function | camelCase  |
 
-If you see any error in my code don't hesitate to report it or create a pull request
+Every text element is supposed to be defined in a language file located in [`src/lang`](/src/lang/) based on [`template.h`](/src/lang/template.h)
 
-<!-- **__Special case__** : A function directly returning a value (for example a method on a class) is considered as a variable
-> See [box_settings](test/projects/printMenu/src/box_settings.h#5) `width_in()`  and `heigh_in()` -->
+If you see any error in my code don't hesitate to report it or create a pull request
