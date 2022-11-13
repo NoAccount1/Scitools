@@ -20,6 +20,7 @@ void invertRectangle(uint x, uint y, uint width, uint height)
     }
   }
   gfx_BlitBuffer();
+  gfx_SetDrawScreen();
 }
 
 #endif

@@ -1,73 +1,100 @@
 #ifndef MENU
 #define MENU
 
-#include <ti/getcsc.h>
-#include <ti/getkey.h>
-
 /**
  * @brief Display a menu with box en text
  *
  * @param[in] title The title displayed at the top of the screen
- * @param[in] elements[] An a
- * @param[in] size
- * @param[in] box
- * @param[in] txt
- * @param[out] pos
+ * @param[in] elements[] An array containing each menu elements
+ * @param[in] size The number of elements in the array
+ * @param[in] box The box settings
+ * @param[in] txt The textBox settings
  *
  * @return The index of the selected element
  */
-uint displayMenu(const char *title, char * elements[], uint8_t size, BoxParam box, TextParam txt, ElementsParam el, uint &pos)
+key_index displayMenu(const char *title, const char elements[][30], uint8_t size, const BoxParam box, const TextParam txt, const ElementsParam element)
 {
+  uint pos;
   drawBoxText(title, box, txt, pos);
 
   // Print each element
-  for (uint i = 0; i <= size; i++)
+  for (uint i = 0; i < size; i++)
   {
-    uint xpos = 4*FONT_WIDTH; // Indent of 4 characters == 24 pixels
-    uint ypos = pos + el.margin_top + i*(FONT_HEIGHT + el.gap);
+    uint x_pos = 4*FONT_WIDTH;
+    uint y_pos = pos + element.margin_top + i*(FONT_HEIGHT + element.gap);
 
-    char *out = (char *)malloc(30*sizeof(char));
-    char *i_string = (char *)malloc(3);
-    { // Convert i to string
-      real_t i_real_t =  os_Int24ToReal(i+1);
-      os_RealToStr(i_string, &i_real_t, -1, 0, 1);
-    }
+    char out[30];
+
+    // Convert i to string
+    char i_string[2];
+    real_t i_real_t =  os_Int24ToReal(i+1);
+    os_RealToStr(i_string, &i_real_t, -1, 0, 1);
+
     strcpy(out, i_string);
-
     strcat(out, ".");
     strcat(out, elements[i]);
 
-    gfx_PrintStringXY(out, xpos, ypos);
-    free(out); free(i_string);
+    gfx_PrintStringXY(out, x_pos, y_pos);
   }
 
-  uint key; uint8_t index = 0;
-  uint xpos = 4*FONT_WIDTH - el.padding;
-  uint ypos = pos + el.margin_top - el.padding;
-  uint width = GFX_LCD_WIDTH - 2*xpos;
-  uint height = FONT_HEIGHT + 2*el.padding;
+  key_index index;
 
-  invertRectangle(xpos, ypos, width, height);
+  uint x_pos = 4*FONT_WIDTH - element.padding;
+  uint y_pos = pos + element.margin_top - element.padding;
 
-  uint ypos_initial = ypos;
+  uint width = GFX_LCD_WIDTH - 2*x_pos;
+  uint height = FONT_HEIGHT + 2*element.padding;
 
-  while ((key = os_GetCSC()) != sk_Enter && key != sk_2nd)
+  invertRectangle(x_pos, y_pos, width, height);
+
+  uint y_pos_initial = y_pos;
+
+  int key;
+  while ((key = os_GetCSC()) != sk_Enter && key != sk_2nd && key != sk_Annul)
   {
-    if (key == 1) // Key down
+    switch (key)
     {
-      invertRectangle(xpos, ypos, width, height);
-      if (index < size) { ypos += FONT_HEIGHT + 4; index++; }
-      else { ypos = ypos_initial; index = 0; }
-      invertRectangle(xpos, ypos, width, height);
-    }
-    if (key == 4) // Key up
-    {
-      invertRectangle(xpos, ypos, width, height);
-      if (index > 0) { ypos -= FONT_HEIGHT + 4; index--; }
-      else { ypos += size*(FONT_HEIGHT + 4); index = size; }
-      invertRectangle(xpos, ypos, width, height);
+      case(sk_Down):
+        invertRectangle(x_pos, y_pos, width, height);
+        if (index.item < size)
+        {
+          y_pos += FONT_HEIGHT + element.gap;
+          index.item++;
+        }
+        else
+        {
+          y_pos = y_pos_initial;
+          index.item = 1;
+        }
+        invertRectangle(x_pos, y_pos, width, height);
+      break;
+
+      case(sk_Up):
+        invertRectangle(x_pos, y_pos, width, height);
+        if (index.item > 1)
+        {
+          y_pos -= FONT_HEIGHT + element.gap;
+          index.item--;
+        }
+        else
+        {
+          y_pos += (size - 1)*(FONT_HEIGHT + element.gap);
+          index.item = size;
+        }
+        invertRectangle(x_pos, y_pos, width, height);
+      break;
+
+      case(sk_Yequ):   index.func = sk_Yequ;   break;
+      case(sk_Window): index.func = sk_Window; break;
+      case(sk_Zoom):   index.func = sk_Zoom;   break;
+      case(sk_Trace):  index.func = sk_Trace;  break;
+      case(sk_Graph):  index.func = sk_Graph;  break;
+      default: break;
     }
   }
+  // if (key == sk_Clear) { index.item = NULL; index.func = -2; return index; }
+  if (key == sk_Clear) { index.item = NULL; }
+  dbg_printf("index.item = %i\nindex.func = %i\n", index.item, index.func);
   return index;
 }
 

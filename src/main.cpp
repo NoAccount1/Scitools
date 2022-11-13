@@ -51,47 +51,57 @@ int main()
   gfx_Begin();
   gfx_SetMonospaceFont(8);
 
-  const uint8_t size = 3;
-  char ** text = (char **)malloc(10*sizeof(char *));
-  for (uint8_t i = 0; i >= size; i++)
-  {
-    text[i] = (char *)malloc(size*sizeof(char));
-  }
-  text[0] = "Derivee";
-  text[1] = "Ajuster";
-  text[2] = "Evolution";
-  text[3] = "Regression lineaire";
+  const uint8_t size = 4;
+  const char text[size][30] = {menu_derivate, menu_adjust, menu_evolution, menu_linear_regression};
 
-  uint pos = (int)malloc(1*sizeof(int));
-  BoxParam box; TextParam txt; ElementsParam el;
-  uint seleted_menu_element = displayMenu("Coucou", text, size, box, txt, el, pos);
+  BoxParam box; const TextParam txt; const ElementsParam element;
 
-  for (uint8_t i = 0; i >= size; i++)
-  {
-    free(text[i]);
-  }
-  free(text);
+  /**/ Menu: /**/
+  static bool error = false;
+  gfx_End(); gfx_Begin();
+  key_index menu_element = displayMenu(menu_title, text, size, box, txt, element);
 
-  switch(seleted_menu_element)
+  switch(menu_element.func)
   {
-    case(0):
-      dbg_printf("Case 0\n");
-      dbg_printf("Derivating\n");
-      derivate();
+    default:
+    case(NULL):
+    if (menu_element.item != NULL) { break; }; // Menu element selected
+      // Key Clear/Annul pressed
     break;
 
-    case(1):
-      dbg_printf("Case 1\n");
-    break;
-
-    case(2):
-      dbg_printf("Case 2\n");
-    break;
-
-    case(3):
-      dbg_printf("Case 3\n");
+    case(sk_Yequ):
+      // Do something else
     break;
   }
+
+  switch(menu_element.item)
+  {
+    default:
+    case(NULL):
+    if (menu_element.func != NULL) { break; }; // Function key pressed
+      // Key Clear/Annul pressed
+    break;
+
+    case(1): dbg_printf("\n### Case 1 ###\n\n");
+      dbg_printf("Deriving\n");
+      derivate(OS_VAR_L1, OS_VAR_L2, OS_VAR_L3, OS_VAR_L4, error);
+      if (error) { goto Menu; }
+    break;
+
+    case(2): dbg_printf("\n### Case 2 ###\n\n");
+
+    break;
+
+    case(3): dbg_printf("\n### Case 3 ###\n\n");
+
+    break;
+
+    case(4): dbg_printf("\n### Case 4 ###\n\n");
+      linearRegress(OS_VAR_L1, OS_VAR_L2, OS_VAR_A, OS_VAR_B, (uint)1e5);
+    break;
+  }
+
+  dbg_printf("\nError : %s\n", error ? "true" : "false");
 
   gfx_End();
   os_ClrHome();
