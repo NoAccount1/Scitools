@@ -24,6 +24,14 @@
 #include <ti/vars.h>
 #include <ti/real.h>
 
+/* Language headers */
+#define LANG_FR
+
+#include "lang/english.h"
+#include "lang/french.h"
+
+#include "lang/default.h"
+
 /* Header files */
 #include "constants.h"
 #include "listutils.h"
