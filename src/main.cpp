@@ -34,20 +34,13 @@
 
 /* Header files */
 #include "constants.h"
+#include "boxes.h"
 #include "listutils.h"
 
 #include "keyutils.h"
-#include "boxes.h"
 
 #include "invert.h"
 #include "menu.h"
-
-
-// TODO: Create menu with key navigation for :
-//  - Derivate
-//     * Adjustments
-//     * Evolution
-//  - Linear regression
 
 int main()
 {
