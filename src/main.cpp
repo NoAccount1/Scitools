@@ -44,9 +44,6 @@
 
 int main()
 {
-  dbg_printf("Clearing home\n");
-  os_ClrHome();
-
   dbg_printf("Starting graphic routines\n");
   gfx_Begin();
   gfx_SetMonospaceFont(8);
