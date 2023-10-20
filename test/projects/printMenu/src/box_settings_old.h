@@ -1,17 +1,15 @@
 // #include <real.h>
 
-typedef unsigned int uint;
-
 /** @brief CSS-like styling */
 class Margin {
   public:
-    // uint margin;
+    // unsigned int margin;
     uint margin_top;
-    uint margin_bottom;
-    uint margin_left;
-    uint margin_right;
+    unsigned int margin_bottom;
+    unsigned int margin_left;
+    unsigned int margin_right;
 
-    Margin(uint def_value = 0)
+    Margin(unsigned int def_value = 0)
     {
       margin_top = def_value;
       margin_bottom = def_value;
@@ -19,7 +17,7 @@ class Margin {
       margin_right = def_value;
     }
 
-    uint val()
+    unsigned int val()
     {
       return margin_bottom;
     }
@@ -33,13 +31,13 @@ class Margin {
 class Padding
 {
   public:
-    uint padding_top;
-    uint padding_bottom;
-    uint padding_left;
-    uint padding_right;
+    unsigned int padding_top;
+    unsigned int padding_bottom;
+    unsigned int padding_left;
+    unsigned int padding_right;
 
     /// @param def_value the default value
-    Padding(uint def_value = 0)
+    Padding(unsigned int def_value = 0)
     {
       padding_top = def_value;
       padding_bottom = def_value;

@@ -37,8 +37,6 @@
 #include "boxes.h"
 #include "listutils.h"
 
-#include "keyutils.h"
-
 #include "invert.h"
 #include "menu.h"
 
@@ -81,7 +79,7 @@ int main()
 
     case(1): dbg_printf("\n### Case 1 ###\n\n");
       dbg_printf("Deriving\n");
-      derivate(OS_VAR_L1, OS_VAR_L2, OS_VAR_L3, OS_VAR_L4, error);
+      differentiate(OS_VAR_L1, OS_VAR_L2, OS_VAR_L3, OS_VAR_L4, error);
       if (error) { goto Menu; }
     break;
 
@@ -94,7 +92,7 @@ int main()
     break;
 
     case(4): dbg_printf("\n### Case 4 ###\n\n");
-      linearRegress(OS_VAR_L1, OS_VAR_L2, OS_VAR_A, OS_VAR_B, (uint)1e5);
+      linearRegress(OS_VAR_L1, OS_VAR_L2, OS_VAR_A, OS_VAR_B, (unsigned int)1e5);
     break;
   }
 
