@@ -10,12 +10,6 @@
 #include "constants.h"
 #include "boxes.h"
 
-/**
- * @brief Draw a box
- *
- * @param[in] s a list of parameters for the box
- * @param[out] export_var the position of the bottom of the box (margin included)
- */
 void drawBox(BoxParam s, unsigned int &export_var)
 {
   for (uint8_t i = 0; i<s.thickness; i++)
@@ -29,14 +23,6 @@ void drawBox(BoxParam s, unsigned int &export_var)
   export_var = s.height + 2*s.y;
 }
 
-/**
- * @brief Draw a box with text inside
- *
- * @param[in] text The text to be printed inside of the box
- * @param[in] box Parameters for the box
- * @param[in] txt Parameters for the text
- * @param[out] export_var Position of the bottom of the box (margin included)
- */
 void drawBoxText(const char *text, BoxParam box, TextParam txt, unsigned int &export_var)
 {
   box.text = true;
@@ -58,9 +44,6 @@ void drawBoxText(const char *text, BoxParam box, TextParam txt, unsigned int &ex
   export_var = 2*box.thickness + box.height + box.margin_v;
 }
 
-/**
- * @brief Display an error at the center of the screen
- */
 void drawBoxError(const char *title, const char *subtitle, bool &error)
 {
   error = true; unsigned int tmp;
