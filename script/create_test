@@ -56,4 +56,4 @@ CXXFLAGS = -Wall -Wextra -Oz
 
 include \$(shell cedev-config --makefile)" >> makefile
 
-lite-xl src/main.cpp makefile
+# lite-xl src/main.cpp makefile
