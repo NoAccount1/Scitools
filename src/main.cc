@@ -33,11 +33,9 @@
 #include "lang/default.h"
 
 /* Header files */
-#include "includes/onstants.h"
-#include "includes/gui.h"
+#include "include/constants.h"
+#include "include/gui.h"
 #include "maths.h"
-
-#include "menu.h"
 
 int main()
 {
