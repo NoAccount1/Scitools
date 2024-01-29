@@ -33,11 +33,10 @@
 #include "lang/default.h"
 
 /* Header files */
-#include "constants.h"
-#include "boxes.h"
-#include "listutils.h"
+#include "includes/onstants.h"
+#include "includes/gui.h"
+#include "maths.h"
 
-#include "invert.h"
 #include "menu.h"
 
 int main()

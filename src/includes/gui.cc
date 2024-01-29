@@ -8,7 +8,39 @@
 #include <string.h>
 
 #include "constants.h"
-#include "boxes.h"
+#include "gui.h"
+
+
+class Box
+{
+  public:
+    // Properties
+    int x_pos = 0;
+    int y_pos = 0;
+    uint8_t thickness = 1;
+    uint8_t height = 30;
+    unsigned int width = GFX_LCD_WIDTH;
+    bool regular = true;
+    uint8_t margin_h = 5; // Horizontal margin
+    uint8_t margin_v = 5; // Vertical margin
+    bool text = false;
+
+    // Methods
+    unsigned int getWidthIn() {
+      return GFX_LCD_WIDTH - 2*(thickness + x_pos + margin_h);
+    }
+    unsigned int getHeightIn() {
+      return height - 2*thickness;
+    }
+
+    void setHeightIn(uint8_t _height_in)
+    {
+      height = _height_in + 2*thickness;
+    }
+};
+
+Box toto;
+toto.x_pos = 5;
 
 void drawBox(BoxParam s, unsigned int &export_var)
 {

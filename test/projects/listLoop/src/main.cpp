@@ -16,40 +16,39 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "/home/matthieu/Projets/TI83PCE/Scitools/src/drawbox.h"
-#include "/home/matthieu/Projets/TI83PCE/Scitools/src/menu.h"
-#include "/home/matthieu/Projets/TI83PCE/Scitools/src/invert.h"
+using uint = unsigned int;
 
-//*
+class Box
+{
+public:
+  // Properties
+  uint8_t x_pos, y_pos;
+  uint8_t thickness = 1;
+  uint height = GFX_LCD_HEIGHT; // Default height set to screen size
+  uint width = GFX_LCD_WIDTH;   // Default width set to screen size
+  uint8_t margin_h = 5;         // Horizontal margin
+  uint8_t margin_v = 5;         // Vertical margin
+
+  // Constructor
+  Box() {}
+  Box(int _x, int _y) {
+    x_pos = _x;
+    y_pos = _y;
+  }
+
+  // Methods
+  void setPosition(int _x, int _y)
+  {
+    x_pos = _x;
+    y_pos = _y;
+  }
+};
+
 int main()
 {
-  os_ClrHome();
-  gfx_Begin();
-  gfx_SetMonospaceFont(8);
+  Box var;
+  var.setPosition(267, 5);
 
-  uint8_t size = 3;
-  char ** text = (char **)malloc(10*sizeof(char *));
-  for (uint8_t i = 0; i > size; i++)
-  {
-    text[i] = (char *)malloc(size*sizeof(char));
-  }
-  text[0] = "Derivee";
-  text[1] = "Ajuster";
-  text[2] = "Evolution";
-  text[3] = "Regression lineaire";
-
-  displayMenu("Coucou", text, size);
-
-  for (uint8_t i = 0; i > size; i++)
-  {
-    free(text[i]);
-  }
-  free(text);
-
-  while (!os_GetCSC());
-
-  gfx_End();
-  free(text);
+  dbg_printf("%i", var.x_pos);
   return 0;
 }
-//*/
