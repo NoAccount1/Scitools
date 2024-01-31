@@ -27,22 +27,23 @@ class Text
 {
 public:
     // Properties
-    uint8_t font_size;
-    uint8_t alignment;
+    uint16_t x_pos, y_pos;
+    uint8_t font_size = 8;
+    uint8_t alignment = 0;
     uint8_t font_color = 255;
     uint8_t background_color = 0;
 
     // Constructor
-    Text(uint8_t _font_size = 8, uint8_t _alignment = 0)
+    Text(uint16_t _x = 0, uint16_t _y = 0)
     {
-        font_size = _font_size;
-        alignment = _alignment;
-        gfx_SetMonospaceFont(_font_size);
+        x_pos = _x;
+        y_pos = _y;
     }
 
     // Methods
-    void setSize();
+    void setPosition(uint16_t _x, uint16_t _y);
+    void setSize(uint8_t font_size);
     void setColor(uint8_t _font_color, uint8_t _background_color);
     void setAlignment(uint8_t _alignment);
-    void draw(char *_text);
+    void draw(const char *_text);
 };

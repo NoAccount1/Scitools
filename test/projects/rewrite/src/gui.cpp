@@ -52,6 +52,11 @@ void Box::draw()
     }
 }
 
+void Text::setPosition(uint16_t _x, uint16_t _y)
+{
+    x_pos = _x;
+    y_pos = _y;
+}
 void Text::setSize(uint8_t _font_size)
 {
     font_size = _font_size;
@@ -68,6 +73,7 @@ void Text::setAlignment(uint8_t _alignment)
     alignment = _alignment;
 }
 
-void Text::draw(char *text)
+void Text::draw(const char *_text)
 {
+    gfx_PrintStringXY(_text, x_pos, y_pos);
 }

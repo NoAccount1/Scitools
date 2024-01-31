@@ -27,7 +27,11 @@ int main()
     box.setSize(200, 50);
     box.setThickness(3);
 
+    Text message(12, 12);
+    const char *content = "test";
+
     box.draw();
+    message.draw(content);
 
     while (!os_GetCSC())
         ;
