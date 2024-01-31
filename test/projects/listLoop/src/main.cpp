@@ -16,18 +16,21 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "gui.cpp"
+#include "gui.h"
+#include "math.h"
 
 int main()
 {
-  gfx_Begin();
-  Box box;
+    gfx_Begin();
+    Box box;
+    box.setPosition(10, 10);
+    box.setSize(200, 50);
+    box.setThickness(3);
 
-  box.draw();
+    box.draw();
 
-  dbg_printf("%i\n", box.x_pos);
-
-  while (!os_GetCSC());
-  gfx_End();
-  return 0;
+    while (!os_GetCSC())
+        ;
+    gfx_End();
+    return 0;
 }
